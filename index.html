@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>색깔을 맞춰봐</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="lib/global.js"></script>
+</head>
+
+<body>
+
+    <div class="modal fade" id="youInfoModal" tabindex="-1" role="dialog" aria-labelledby="youInfoModal"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="youInfoModalLabel">당신의 정보</h5>
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body">
+                    <form id="youInfoModalFrm">
+                        <div class="form-group">
+                            <label for="your-name" class="col-form-label">당신의 이름:</label>
+                            <input type="text" class="form-control" id="your-name">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="submitInfo" class="btn btn-primary">다음</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-dark bg-primary justify-content-between">
+        <a class="navbar-brand" href="#">색깔을 맞춰봐</a>
+        <form class="form-inline">
+            <h4><span class="badge badge-primary" id="yourNameSpan"></span></h4>
+        </form>
+    </nav>
+
+    <div class="row">
+        <div class="col-sm-6 text-center">
+            <button type="button" class="btn btn-primary" style="margin-top: 5px;">
+                남은 시간 <span class="badge badge-light" id="countdown" style="text-align: center;"></span>
+            </button>
+        </div>
+        <div class="col-sm-6 text-center">
+            <button type="button" class="btn btn-primary" style="margin-top: 5px;">
+                너의 점수 <span class="badge badge-light" style="text-align: center;" id="score">00</span>
+            </button>
+            <button type="button" class="btn btn-primary" style="margin-top: 5px;">
+                이전 점수 <span class="badge badge-light" style="text-align: center;" id="prevScore">00</span>
+            </button>
+            <button type="button" class="btn btn-primary" style="margin-top: 5px;">
+                높은 점수 <span class="badge badge-light" style="text-align: center;" id="highScore">00</span>
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h4> <span class="badge badge-light" style="text-align: center;">색깔을 맞춰봐</span></h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12" id="showColor" style="width: 100%; height: 400px; margin-top: 10px;">
+                <div class="text-center" style="margin-top: 200px;">
+                    <h5><span class="badge badge-light" id="response"></span></h5>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center" id="showColor" style="margin-top: 10px;">
+                <button type="button" class="btn btn-danger" style="text-align: center;" onclick="setColorsSkip();"
+                    id="skipBtn">건너 뛰기</button>
+                <button type="button" class="btn btn-success" style="text-align: center;" onclick="record();"
+                    id="speakBtn">말하다</button>
+                <button type="button" class="btn btn-success" style="text-align: center; visibility: hidden;"
+                    id="playAgainBtn" onclick="playAgain();">다시 플레이</button>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#youInfoModal').modal('show');
+        //countDown();
+        setColors();
+        $('#playAgainBtn').css("visibility", "hidden");
+    });
+
+    $('#submitInfo').click(function () {
+        playerName = document.getElementById("your-name").value;
+        $('#yourNameSpan').html("선수 이름: " + playerName);
+        countDown();
+        setScoresAndInfo();
+        $('#youInfoModal').modal('hide');
+    });
+
+</script>
